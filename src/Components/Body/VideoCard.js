@@ -10,7 +10,7 @@ const VideoCard = ({ video }) => {
       <div>
         <img
           className="rounded-xl w-96"
-          src={thumbnails.medium.url}
+          src={thumbnails?.maxres?.url}
           alt="thumbnails"
         />
       </div>

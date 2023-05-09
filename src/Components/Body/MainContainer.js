@@ -29,9 +29,15 @@ const MainContainer = () => {
         {videos.length > 0
           ? videos.map((video) => {
               return (
-                <Link to={"/youtube/watch?v=" + video.id}>
-                  <VideoCard video={video} key={video.id} />
-                </Link>
+                video?.snippet?.thumbnails?.maxres && (
+                  <Link to={"/youtube/watch?v=" + video.id}>
+                    <VideoCard video={video} key={video.id} />
+                  </Link>
+                )
+
+                // <Link to={"/youtube/watch?v=" + video.id}>
+                //   <VideoCard video={video} key={video.id} />
+                // </Link>
               );
             })
           : Array.apply(null, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).map((dummy) => {
