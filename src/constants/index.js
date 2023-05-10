@@ -7,8 +7,15 @@ export const YOUTUBE_VIDEO_URL =
 export const LIVE_CHAT_API_URL =
   "https://youtube.googleapis.com/youtube/v3/liveChat/messages?key=" + API_KEY;
 
+export const YOUTUBE_SEARCHED_VIDEOS =
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&key=" +
+  API_KEY;
+
 export const YOUTUBE_SEARCH_SUGGESTIONS =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+
+export const CHANNEL_DESCRIPTION =
+  "https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&part=snippet&id=";
 
 export const FILTER_LIST_NAME = [
   "Live",

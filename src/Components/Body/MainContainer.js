@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FILTER_LIST_NAME, YOUTUBE_VIDEO_URL } from "../../constants";
 import Button from "./Button";
@@ -7,15 +8,23 @@ import VideoCard from "./VideoCard";
 
 const MainContainer = () => {
   const [videos, setVideos] = useState([]);
+  const searchList = useSelector((store) => store.search.searchList);
+  // console.log("searchList=>", searchList);
   useEffect(() => {
     getVideos();
   }, []);
+  useEffect(() => {
+    if (searchList) {
+      setVideos(searchList.items);
+    }
+  }, [searchList]);
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_VIDEO_URL);
     const reqData = await data.json();
-    console.log("Req data=>", reqData);
+    // console.log("Req data=>", reqData);
     setVideos(reqData.items);
   };
+  console.log("videos=>", videos);
 
   return (
     <>
@@ -24,16 +33,15 @@ const MainContainer = () => {
           return <Button name={name} />;
         })}
       </div>
-      <div className="flex flex-wrap ml-8">
+      <div className="flex flex-wrap ml-8 mt-4">
         {" "}
-        {videos.length > 0
+        {videos && videos.length > 0
           ? videos.map((video) => {
               return (
-                video?.snippet?.thumbnails?.maxres && (
-                  <Link to={"/youtube/watch?v=" + video.id}>
-                    <VideoCard video={video} key={video.id} />
-                  </Link>
-                )
+                // video?.snippet?.thumbnails?.maxres &&
+                <Link to={"/youtube/watch?v=" + video.id}>
+                  <VideoCard video={video} key={video.id} />
+                </Link>
 
                 // <Link to={"/youtube/watch?v=" + video.id}>
                 //   <VideoCard video={video} key={video.id} />

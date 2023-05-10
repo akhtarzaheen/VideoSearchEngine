@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import hamburgerLogo from "../../assets/img/hamburger.png";
-import youtubeLogo from "../../assets/img/youtube.png";
+import youtubeLogo from "../../assets/img/Youtube-logo.png";
 import profileLogo from "../../assets/img/profileLogo.png";
 import searchLogo from "../../assets/img/searchIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeToggle } from "../../Slices/App-slice";
-import { YOUTUBE_SEARCH_SUGGESTIONS } from "../../constants";
+import {
+  YOUTUBE_SEARCHED_VIDEOS,
+  YOUTUBE_SEARCH_SUGGESTIONS,
+} from "../../constants";
 import { addListener } from "@reduxjs/toolkit";
 import { addCache } from "../../Slices/Cache-Slice";
+import { addSearchList } from "../../Slices/Search-Slice";
 
 const Head = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestionsList, setSuggestionsList] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchedVideoList, setSearchedVideoList] = useState();
   const cache = useSelector((store) => store.cache);
+
   console.log("cache=>", cache);
   const changeToggleHandler = () => {
     dispatch(changeToggle());
@@ -49,12 +55,31 @@ const Head = () => {
 
   const onSearchFocus = () => {
     if (searchQuery.length > 0) {
+      console.log("on search focus");
       setShowSuggestions(true);
     }
   };
 
   const onSearchBlur = () => {
+    console.log("on search blur");
     setShowSuggestions(false);
+  };
+
+  const onSearchFilter = () => {
+    console.log("searchQuery=>", searchQuery);
+    getAllSearchedVideos(searchQuery);
+  };
+
+  const selectedSearch = (selSuggestion) => {
+    setSearchQuery(selSuggestion);
+  };
+
+  const getAllSearchedVideos = async (searchQuery) => {
+    const data = await fetch(YOUTUBE_SEARCHED_VIDEOS + "&q=" + searchQuery);
+    const searchedVideoList = await data.json();
+    setSearchedVideoList(searchedVideoList);
+    console.log("Searched Videos=>", searchedVideoList);
+    dispatch(addSearchList(searchedVideoList));
   };
   return (
     <div className="grid grid-flow-col p-2 m-2">
@@ -83,7 +108,10 @@ const Head = () => {
           <div className="absolute mt-9 bg-white w-[28%] p-4 rounded-lg shadow shadow-gray-100">
             <ul>
               {suggestionsList.map((suggestion) => (
-                <li className="py-1 hover:bg-gray-100 flex items-center">
+                <li
+                  className="py-1 hover:bg-gray-100 flex items-center"
+                  onClick={() => selectedSearch(suggestion)}
+                >
                   <img
                     src={searchLogo}
                     alt={"search logo"}
@@ -95,7 +123,10 @@ const Head = () => {
             </ul>
           </div>
         )}
-        <button className="px-4 rounded-r-full bg-gray-300">
+        <button
+          className="px-4 rounded-r-full bg-gray-300"
+          onClick={onSearchFilter}
+        >
           <img className="h-6" src={searchLogo} alt="searchIcon" />
         </button>
       </div>
