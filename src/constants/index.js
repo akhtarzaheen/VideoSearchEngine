@@ -21,6 +21,8 @@ export const FILTER_LIST_NAME = [
   "Live",
   "Games",
   "Sports",
+  "Namaste Js",
+  "Namaste Dev",
   "News",
   "Entertainment",
   "Films Criticism",
@@ -30,6 +32,13 @@ export const FILTER_LIST_NAME = [
   "Trailers",
   "Manga",
   "Anime",
+  "Trailers",
+  "Manga",
+  "Anime",
+  "Trailers",
+  "Manga",
+  "Anime",
+  "Cricket",
 ];
 
 export const LIVE_CHAT_NAME = ["Zaheen Akhtar", "Ankit", "Arshdeep"];

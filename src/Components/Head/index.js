@@ -91,7 +91,7 @@ const Head = () => {
           alt={"Menu Icon"}
         />
         <a href="/youtube">
-          <img className="h-10 px-2" src={youtubeLogo} alt="Youtube logo" />
+          <img className="h-8 px-2" src={youtubeLogo} alt="Youtube logo" />
         </a>
       </div>
       <div className="flex col-span-10 justify-center">

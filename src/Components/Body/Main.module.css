@@ -1,0 +1,28 @@
+.hiddenScroll{
+    transition: all 0.2s ease-in-out;
+}
+/* width */
+.hiddenScroll::-webkit-scrollbar {
+    display: none;
+    height: 6px;
+}
+
+  /* Track */
+  .hiddenScroll::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    /* Handle */
+    .hiddenScroll::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border-radius: 20px;
+    }
+    
+    /* Handle on hover */
+    /* .hiddenScroll::-webkit-scrollbar-thumb:hover {
+        background: #e0e0e0;
+    } */
+    
+    /* .hiddenScroll:hover.hiddenScroll::-webkit-scrollbar {
+    display: block;
+  } */

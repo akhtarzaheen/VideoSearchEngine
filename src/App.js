@@ -28,8 +28,10 @@ function App() {
   return (
     <div>
       <Provider store={store}>
-        <Head />
-        <RouterProvider router={appRouter} />
+        <div className="min-h-screen flex flex-col">
+          <Head />
+          <RouterProvider router={appRouter} />
+        </div>
       </Provider>
     </div>
   );

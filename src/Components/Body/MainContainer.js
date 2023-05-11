@@ -5,8 +5,9 @@ import { FILTER_LIST_NAME, YOUTUBE_VIDEO_URL } from "../../constants";
 import Button from "./Button";
 import ShimmerVideoCard from "./ShimmerVideoCard";
 import VideoCard from "./VideoCard";
+import style from "./Main.module.css";
 
-const MainContainer = () => {
+function MainContainer() {
   const [videos, setVideos] = useState([]);
   const searchList = useSelector((store) => store.search.searchList);
   // console.log("searchList=>", searchList);
@@ -27,14 +28,15 @@ const MainContainer = () => {
   console.log("videos=>", videos);
 
   return (
-    <>
-      <div className="flex">
+    <div className="w-full flex flex-col">
+      <div
+        className={`w-full flex items-center overflow-auto pb-2 ${style.hiddenScroll}`}
+      >
         {FILTER_LIST_NAME.map((name) => {
           return <Button name={name} />;
         })}
       </div>
       <div className="flex flex-wrap ml-8 mt-4">
-        {" "}
         {videos && videos.length > 0
           ? videos.map((video) => {
               return (
@@ -52,8 +54,8 @@ const MainContainer = () => {
               return <ShimmerVideoCard />;
             })}{" "}
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default MainContainer;
